@@ -18,5 +18,28 @@ public class ExecuteQuery01 {
         while (resultSet.next()){
             System.out.println(resultSet.getString(1));
         }
+
+        //2.Örnek: "region_id"nin 2'den büyük olduğu "country_id" ve "country_name" değerlerini çağırın.
+
+        String sql2= "select country_id, country_name From countries where region_id>2";
+        ResultSet resultSet2= statement.executeQuery(sql2);
+        while(resultSet2.next()){
+            System.out.println(resultSet2.getString(1)+"  "+resultSet2.getString(2));
+
+         //3.Örnek: "number_of_employees" değeri en düşük olan satırın tüm değerlerini çağırın.
+            //3.Örnek: "number_of_employees" değeri en düşük olan satırın tüm değerlerini çağırın.
+            System.out.println("\n===== 3. Örnek =====\n");
+            String sql3 = "SELECT * FROM companies WHERE number_of_employees = (SELECT MIN(number_of_employees) FROM companies)";
+            ResultSet resultSet3 = statement.executeQuery(sql3);
+
+            while (resultSet3.next()) {
+                System.out.println(resultSet3.getObject(1) + "--" + resultSet3.getObject(2) + "--" + resultSet3.getObject(3));
+            }
+
+
+            connection.close();
+            statement.close();
+
+        }
     }
 }
